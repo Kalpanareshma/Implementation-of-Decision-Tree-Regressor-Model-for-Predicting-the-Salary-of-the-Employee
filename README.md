@@ -8,10 +8,13 @@ To write a program to implement the Decision Tree Regressor Model for Predicting
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1.Import the libraries and read the data frame using pandas. 
+
+2.Calculate the null values present in the dataset and apply label encoder. 
+
+3.Determine test and training data set and apply decison tree regression in dataset. 
+
+4.calculate Mean square error,data prediction and r2.
 
 ## Program:
 ```
@@ -20,10 +23,47 @@ Program to implement the Decision Tree Regressor Model for Predicting the Salary
 Developed by: 
 RegisterNumber:  
 */
+import pandas as pd
+data=pd.read_csv("Salary.csv")
+data.head()
+data.info()
+data.isnull().sum()
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data["Position"]=le.fit_transform(data["Position"])
+data.head()
+x=data[["Position","Level"]]
+x.head()
+y=data[["Salary"]]
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test=train_test_split(x,y,test_size=0.2,random_state=2)
+from sklearn.tree import DecisionTreeRegressor
+dt=DecisionTreeRegressor()
+dt.fit(x_train,y_train)
+y_pred=dt.predict(x_test)
+from sklearn import metrics
+mse=metrics.mean_squared_error(y_test, y_pred)
+mse
+r2=metrics.r2_score(y_test,y_pred)
+r2
+dt.predict([[5,6]])
 ```
 
 ## Output:
-![Decision Tree Regressor Model for Predicting the Salary of the Employee](sam.png)
+### Data.Head()
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/35730b39-e16c-4044-98ad-79f309532dd6)
+### Data.info()
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/4e1d1988-7e15-41fb-bbe0-170acf6ec5a6)
+### isnull() and sum()
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/8dcb85ab-af23-439d-8522-32c081ac3eac)
+### Data.Head() for salary:
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/f47b5066-70d8-464f-84a3-102997fc8936)
+### MSE Value:
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/73fa3d25-b8b7-4dbe-bbd4-343ea9071e45)
+### r2 Value:
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/1d41fedc-2d74-4b3a-bcb8-4dc38aa8755f)
+### Data Prediction:
+![image](https://github.com/Kalpanareshma/Implementation-of-Decision-Tree-Regressor-Model-for-Predicting-the-Salary-of-the-Employee/assets/122040453/d6c16c7f-33cf-4664-98a1-043553bbec25)
 
 
 ## Result:
